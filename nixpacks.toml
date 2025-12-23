@@ -2,8 +2,10 @@
 nixPkgs = ["python39"]
 
 [phases.install]
-cmds = ["pip install -r requirements.txt"]
+cmds = ["python3 -m pip install --upgrade pip", "pip3 install -r requirements.txt"]
+
+[phases.build]
+cmds = []
 
 [start]
-cmd = "gunicorn app_simplified:app --bind 0.0.0.0:$PORT"
-
+cmd = "gunicorn app_simplified:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
